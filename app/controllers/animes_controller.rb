@@ -32,9 +32,9 @@ class AnimesController < ApplicationController
 
     # def avgrating
     #     sum = 0
-    #     comments =  Recipe.find(params[:id]).comments
-    #     comments.each{|comment| sum += comment.rating}
-    #     sum.fdiv(comments.size)
+    #     reviews =  Anime.find(params[:id]).reviews
+    #     reviews.each{|review| sum += review.rating}
+    #     sum.fdiv(reviews.size)
     # end
     private 
     def anime_params
