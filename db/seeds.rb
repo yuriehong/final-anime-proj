@@ -7,17 +7,23 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 puts "🌱 Seeding data..."
-require 'faker'
+
+#require 'faker'
 User.destroy_all
 Anime.destroy_all
 Review.destroy_all
-
-u1 = User.create(name: "Violet Johnson")
-u2 = User.create(name: "Eunice Kim")
-u3 = User.create(name: "Haley Song")
-u4 = User.create(name: "Mark Lee")
-u5 = User.create(name: "Joseph Yoon")
-
+u1 = User.create!({
+    name: "Yurie",
+    username: "yhong",
+    email: "yurie.hong@gmail.com",
+    password: "meepmeep",
+})
+u2 = User.create!({
+    name: "Haley",
+    username: "hail9",
+    email: "hailee@gmail.com",
+    password: "moopmoop",
+})
 
 a1 = Anime.create(title: "Spy x Family", image:"https://www.denofgeek.com/wp-content/uploads/2022/04/SPY-x-FAMILY-KV.jpg?fit=1200%2C675", year: 2022, genre:"Comedy", summary: "World peace is at stake and secret agent Twilight must undergo his most difficult mission yet—pretend to be a family man. Posing as a loving husband and father, he will infiltrate an elite school to get close to a high-profile politician. He has the perfect cover, except his wife is a deadly assassin and neither knows. But someone does, his adopted daughter who is a telepath!")
 a2 = Anime.create(title: "Hunter X Hunter", image:"https://www.cnet.com/a/img/resize/e87b7f497714ecc454464a51a53c16c7f018c915/2022/05/25/36e6a368-1b94-44b1-9fb8-5aaa7977bf05/hunterxhunter.jpg?auto=webp&fit=crop&height=675&width=1200",year: 2011, genre:"Adventure", summary:"Gon, a young boy who lives on Whale Island, dreams of becoming a Hunter like his father, who left when Gon was still young.")
@@ -27,15 +33,15 @@ a5 = Anime.create(title: "That Time I Got Reincarnated As A Slime", image:"https
 a6 = Anime.create(title: "Jujutsu Kaisen", image:"https://www.animationmagazine.net/wordpress/wp-content/uploads/Jujutsu-Kaisen-5.jpg", year: 2022, genre:"Action",  summary: "Yuji Itadori is a boy with tremendous physical strength, though he lives a completely ordinary high school life. One day, to save a classmate who has been attacked by curses, he eats the finger of Ryomen Sukuna, taking the curse into his own soul. From then on, he shares one body with Ryomen Sukuna. Guided by the most powerful of sorcerers, Satoru Gojo, Itadori is admitted to Tokyo Jujutsu High School, an organization that fights the curses... and thus begins the heroic tale of a boy who became a curse to exorcise a curse, a life from which he could never turn back.")
 
 r1 = Review.create(rating: 10, comment: "Amazing family-friendly show. Anya Forger is adorable!", anime_id:a1.id, user_id: u1.id)
-r2 = Review.create(rating: 9, comment: "This anime is really fun to watch, you may think that it is only about a little kid trying to find his dad, but it gets a lot deeper than that. I think this anime should be as popular as One piece, Naruto or Bleach. I don't think there is one single episode in hunter x Hunter where I was bored. The best thing is that this anime has no fillers at all.", anime_id:a2.id, user_id: u5.id)
+r2 = Review.create(rating: 9, comment: "This anime is really fun to watch, you may think that it is only about a little kid trying to find his dad, but it gets a lot deeper than that. I think this anime should be as popular as One piece, Naruto or Bleach. I don't think there is one single episode in hunter x Hunter where I was bored. The best thing is that this anime has no fillers at all.", anime_id:a2.id, user_id: u1.id)
 r3 = Review.create(rating: 10, comment:"I don't write these. this is my first, this show is a gift from the anime gods. it is perfection. not an opinion. a fact. 8 episodes in and they are all flawless. except the fact i want more of them. The Plot effortlessly moves between powerful, creepy, hilarious, and emotional. You love the characters. You are invested. Animation is honestly so gorgeous it ruins other animes for me a bit.", anime_id:a3.id, user_id: u1.id)
 r4 = Review.create(rating: 7, comment: "Unique and funny characters, mystery, action, a wonderful story, and a bunch of hidden lore. This anime will keep you on the edge of your seat and make 1 episode seem like 5 minutes have just passed by. It's different as it throws you in without knowing anything about their world. You figure things out along the way. The soundtrack is also fantastic. Although, they changed and left out some scenes from the webtoon. Which is definitely also worth the read.", anime_id:a4.id, user_id: u2.id)
 r5 = Review.create(rating: 10, comment:"I really really love this show! The MC is overpowered, smart, adorable and a badass! I just love how this show is progressing. I want to watch more about Rimurus adventures and i want to see his little goblin village grow even more. I love the characters, they are all interesting and lovable. I can not get enough of this super awesome anime!!! Great job to the people who made this. Thank you so much!", anime_id:a5.id, user_id: u2.id)
-r6 = Review.create(rating: 10, comment:"One of the best Shonen adaptions of our time and by far the best show to air in 2019. The heart and soul of amazingly talented staffs at Studio Ufotable translated into this emotionally charged and visually stunning series, creating a roller coaster ride filled with breathtaking moments. The Ukiyo-e style splash action sequence and seamless 3D incorporation further enhance the intensity of critical decisions in this Dark Fantasy, taking viewer immersion to a whole new level. Excellent overall execution and cinema level quality production down to every last detail. This is a Must Watch. Rating: 5/5 - A masterpiece. I would recommend this to everyone who loves anime.", anime_id:a3.id, user_id: u3.id)
-r7 = Review.create(rating: 10, comment:"This show is by far the best show out right now. The animation is amazing! The story and fighting system are truly EPIC and the work of a true master mangaka!!!!! I really love how the bad guys have some good guy qualities and the good guys sometimes dip into darkness!", anime_id:a2.id, user_id: u4.id)
+r6 = Review.create(rating: 10, comment:"One of the best Shonen adaptions of our time and by far the best show to air in 2019. The heart and soul of amazingly talented staffs at Studio Ufotable translated into this emotionally charged and visually stunning series, creating a roller coaster ride filled with breathtaking moments. The Ukiyo-e style splash action sequence and seamless 3D incorporation further enhance the intensity of critical decisions in this Dark Fantasy, taking viewer immersion to a whole new level. Excellent overall execution and cinema level quality production down to every last detail. This is a Must Watch. Rating: 5/5 - A masterpiece. I would recommend this to everyone who loves anime.", anime_id:a3.id, user_id: u1.id)
+r7 = Review.create(rating: 10, comment:"This show is by far the best show out right now. The animation is amazing! The story and fighting system are truly EPIC and the work of a true master mangaka!!!!! I really love how the bad guys have some good guy qualities and the good guys sometimes dip into darkness!", anime_id:a2.id, user_id: u2.id)
 r8 = Review.create(rating: 8, comment:"Manga readers already know... The anime has so much potential, and they did such a good job, especially on the first episode, that opening- a masterpiece. Love this with all my heart!!
-    Honestly, I can't wait to see how this all will play out! I really hope it doesn't fail", anime_id:a6.id, user_id: u4.id)
-r9 = Review.create(rating: 9, comment:"Listen this is already a masterpiece. The plot, characters, design all of it is perfect. It makes you super excited about what is going to happen next and that's really important to have in a show. Not to mention the animation is crazy good. The backgrounds are beautiful and the way the curses are shown is great. The show also has a fair bit of humor which makes the whole show not have a super intense and dark atmosphere while still keeping the important parts dark.", anime_id:a6.id, user_id: u5.id)
+    Honestly, I can't wait to see how this all will play out! I really hope it doesn't fail", anime_id:a6.id, user_id: u1.id)
+r9 = Review.create(rating: 9, comment:"Listen this is already a masterpiece. The plot, characters, design all of it is perfect. It makes you super excited about what is going to happen next and that's really important to have in a show. Not to mention the animation is crazy good. The backgrounds are beautiful and the way the curses are shown is great. The show also has a fair bit of humor which makes the whole show not have a super intense and dark atmosphere while still keeping the important parts dark.", anime_id:a6.id, user_id: u1.id)
 r10 = Review.create(rating: 10, comment: "Worth the wait holy cow please bring more out soon and then never stop, the art, pace and voices all seemed amazing for the first episode and if this keeps up I already know it'll be one of the best Manwahs and Animes ever and if you haven't already I highly recommend checking out the Webtoons website and reading on from there if you can't wait.", anime_id: a4.id, user_id: u1.id)
 
 
