@@ -3,10 +3,30 @@ import { useHistory } from "react-router";
 import styled from "styled-components";
 import { Button, FormField, Input, Label } from "../styles";
 
+
 function NewAnime({ user}) {
   const [rating, setRating] = useState(0)
   const [comment, setComment] = useState("")
   const [anime, setAnime] = useState("")
+  const [search, setSearch] = useState("")
+  const [animeData, setAnimeData] = useState([]);
+
+
+ 
+
+  const searchR = (searchTerm) => {
+    return fetch(
+      `https://api.jikan.moe/v3/search/anime?q=${searchTerm}&limit=5`
+    ).then((response) => response.json());
+  };
+  const handleSearch = (e) => {
+    e.preventDefault();
+    searchR.search(search).then((data) => {
+      search.setData(data.results);
+      history.push('/');
+    });
+  };
+
 
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -40,6 +60,25 @@ function NewAnime({ user}) {
   return (
     <Wrapper>
       <WrapperChild>
+        <form className="home__form">
+            <FormField type="submit" className="home__formControl">
+              <Input
+                placeholder="Search for your favorite anime..."
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
+                className="home__input"
+              />
+              <button
+                variant="contained"
+                color="primary"
+                type="submit"
+                disabled={!search}
+                onClick={handleSearch}
+              > Search </button>
+              </FormField>
+              </form>
+
+             
         <form onSubmit={handleSubmit}>
           <FormField>
             
@@ -62,9 +101,9 @@ function NewAnime({ user}) {
           </FormField>
        
           <FormField>
-            <Button color="primary" type="submit">
+            <button color="primary" type="submit">
               {isLoading ? "Loading..." : "Submit Review"}
-            </Button>
+            </button>
           </FormField>
           <FormField>             
       {errors? <div>{errors}</div>:null}

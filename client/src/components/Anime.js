@@ -49,7 +49,7 @@ return (
       <Button onClick ={() => handleDelete()}>Delete</Button>
       {/* <Button variant="outline" onClick = {() => setShowEdit(!showEdit)}>Edit </Button> */}
       
-      <h2>{anime.title}</h2>
+      <h2 className = "font-link">{anime.title}</h2>
       <img  src ={anime.image} width="400" height="400" alt = {anime.title}/>
       <p>
       <b>Year: {anime.year}</b>

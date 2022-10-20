@@ -9,7 +9,7 @@ function Login({ onLogin }) {
 
   return (
     <Wrapper>
-      <Logo>My Animes</Logo>
+      <Logo className ="font-link">Watashi no Animes</Logo>
       {showLogin ? (
         <>
           <LoginForm onLogin={onLogin} />
@@ -38,9 +38,9 @@ function Login({ onLogin }) {
 }
 
 const Logo = styled.h1`
-  font-family: "Comic Sans";
-  font-size: 3rem;
-  color: lightpink;
+  font-family: Chango;
+  font-size: 4rem;
+  color: lightblue;
   margin: 8px 0 16px;
 `;
 

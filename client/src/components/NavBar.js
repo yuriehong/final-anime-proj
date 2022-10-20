@@ -35,6 +35,7 @@ function NavBar({ user, setUser }) {
 }
 
 const Wrapper = styled.header`
+  font-family: Chango;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,8 +43,8 @@ const Wrapper = styled.header`
 `;
 
 const Logo = styled.h1`
-  font-family: "Comic Sans";
-  font-size: 3rem;
+  font-family: "Chango";
+  font-size: 2rem;
   color: lightpink;
   margin: 0;
   line-height: 1;
@@ -55,10 +56,12 @@ const Logo = styled.h1`
 `;
 
 const Nav = styled.nav`
+font-family: "Chango";
+
   display: flex;
   gap: 4px;
-  position: absolute;
-  right: 8px;
+ position: absolute;
+    right: 8px;
 `;
 
 export default NavBar;
