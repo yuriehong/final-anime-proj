@@ -3,9 +3,11 @@ import { useHistory } from "react-router";
 import styled from "styled-components";
 import { Button, FormField, Input, Label } from "../styles";
 
-function NewAnime({ user, anime, setReviews, reviews}) {
+function NewAnime({ user}) {
   const [rating, setRating] = useState(0)
   const [comment, setComment] = useState("")
+  const [anime, setAnime] = useState("")
+
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
@@ -26,7 +28,7 @@ function NewAnime({ user, anime, setReviews, reviews}) {
     }).then((r) => {
       setIsLoading(false);
       if (r.ok) {
-        setReviews([...reviews, newRev])
+        // setReviews([...reviews, newRev])
         history.push("/");
         
       } else {
@@ -40,6 +42,7 @@ function NewAnime({ user, anime, setReviews, reviews}) {
       <WrapperChild>
         <form onSubmit={handleSubmit}>
           <FormField>
+            
             <Label htmlFor="rating">Rating</Label>
             <Input
               type="integer"

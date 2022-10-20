@@ -1,5 +1,7 @@
 class ReviewsController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :invalid
+    rescue_from ActiveRecord::RecordNotFound, with: :not_found
+
 
     before_action :authorize
     skip_before_action :authorize, only: [:create,:destroy]
@@ -36,7 +38,9 @@ class ReviewsController < ApplicationController
        params.permit([:rating, :comment, :anime_id, :user_id]) 
     end
 
-
+    def not_found
+        render json: { error: "Review not found"}, status: :not_found
+    end
     def invalid
         render json: { error: "Invalid" }, status: :unprocessable_entity
     end

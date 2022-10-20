@@ -11,6 +11,8 @@
         "heroku-postbuild": "npm run clean && npm run build && npm run deploy"
     },
     "dependencies": {
-        "react-markdown": "^8.0.3"
+        "react-icons": "^4.4.0",
+        "react-map-gl-geocoder": "^2.2.0",
+        "react-router-dom": "^6.3.0"
     }
 }

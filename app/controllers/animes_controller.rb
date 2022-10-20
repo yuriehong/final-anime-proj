@@ -20,11 +20,11 @@ class AnimesController < ApplicationController
         render json: anime, status: :created
     end
 
-    def update
-        anime = Anime.find(params[:id])
-        anime.update(anime_params)
-        render json: anime, status: :ok
-    end
+    # def update
+    #     anime = Anime.find(params[:id])
+    #     anime.update(anime_params)
+    #     render json: anime, status: :ok
+    # end
     def destroy
         Anime.find(params[:id]).destroy
         head :no_content

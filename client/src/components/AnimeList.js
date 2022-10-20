@@ -7,6 +7,8 @@ import Anime from "./Anime.js"
 
 function AnimeList({user}) {
   const [animes, setAnimes] = useState([]);
+  const [reviews, setReviews] = useState([]);
+
   const [category, setCategory] = useState("All")
 
 //removes anime for the frontend
@@ -22,6 +24,12 @@ function onUpdateAnime(){
   }
 
 //get animes
+  useEffect(() => {
+    fetch("/reviews")
+      .then((r) => r.json())
+      .then(setReviews);
+  }, []);
+
   useEffect(() => {
     fetch("/animes")
       .then((r) => r.json())
@@ -45,8 +53,8 @@ function onUpdateAnime(){
 
           </select> */}
       {animes.length > 0 ? (
-        animes.map((anime) => (
-         <Anime user={user} anime ={anime} onRemoveAnime = {onRemoveAnime} />
+        animes.map((anime, i) => (
+         <Anime key = {i} user={user} anime ={anime} onRemoveAnime = {onRemoveAnime} />
         ))
       ) : (
         <>

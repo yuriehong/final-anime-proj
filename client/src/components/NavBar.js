@@ -18,8 +18,6 @@ function NavBar({ user, setUser }) {
 
   return (
     <Wrapper>
-      <BrowserRouter>
-
       <Logo>
         <Link to="/">Watched Animes</Link>
       </Logo>
@@ -32,7 +30,6 @@ function NavBar({ user, setUser }) {
         </Button>
         <h4>Welcome <em>{user.username}</em></h4>
       </Nav>
-      </BrowserRouter>
     </Wrapper>
   );
 }

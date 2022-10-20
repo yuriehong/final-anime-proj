@@ -28,7 +28,7 @@ function App() {
             <NewAnime user={user} />
           </Route>
           <Route path="/">
-            <AnimeList user ={user} />
+            <AnimeList user ={user} key = {user.id}/>
           </Route>
         </Switch>
       </main>
