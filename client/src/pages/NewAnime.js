@@ -41,16 +41,42 @@ function handleSearch(e){
   function handleClick(a) {
     setAnime(a)
     setShowR(!showR)
+    console.log(a)
+
 
   }
 
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
-    let newRev = {rating,
-      comment,
-      "anime_id": anime.id,
+    let newRev = {
+      "rating": rating,
+      "comment": comment,
+      "anime_id": anime.mal_id,
       "user_id": user.id   }
+      let newAni = {
+        "id": anime.mal_id,
+        "title": anime.title,
+        "image": anime.images.jpg.image_url,
+        "year": anime.year,
+        "genre": anime.genres[0].name,
+        "summary": anime.synopsis
+      }
+      console.log(newAni)
+      console.log(newRev)
+      fetch("/animes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newAni),
+      }).then((r) => {
+        setIsLoading(false);
+        if (r.ok) {
+        } else {
+          r.json().then((err) => setErrors(err.error));
+        }
+      });
     fetch("/reviews", {
       method: "POST",
       headers: {
@@ -62,6 +88,7 @@ function handleSearch(e){
       if (r.ok) {
         // setReviews([...reviews, newRev])
         history.push("/");
+
         
       } else {
         r.json().then((err) => setErrors(err.error));
@@ -92,8 +119,8 @@ function handleSearch(e){
         <div>
           <h1>Results: </h1>
           {animeData.map((a)=><div className= "anime"> 
-          <li><a href = {a.images.jpg.image_url}>{a.title} </a> <img src={a.images.jpg.image_url}/>
-          <Button onClick = {handleClick}> Watched </Button>
+          <li><a href = {a.url}>{a.title} </a> <img  width="50" height="55" src={a.images.jpg.image_url}/>
+          <Button onClick = {() => handleClick(a)}> Watched </Button>
           </li></div>)
 
          } </div>

@@ -38,7 +38,7 @@ class AnimesController < ApplicationController
     # end
     private 
     def anime_params
-       params.permit([:title, :image, :year, :genre, :summary]) 
+       params.permit([:id, :title, :image, :year, :genre, :summary]) 
     end
 
     # def authorize
