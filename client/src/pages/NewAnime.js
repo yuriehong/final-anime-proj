@@ -118,9 +118,9 @@ function handleSearch(e){
         {displayData ? 
         <div>
           <h1>Results: </h1>
-          {animeData.map((a)=><div className= "anime"> 
-          <li><a href = {a.url}>{a.title} </a> <img  width="50" height="55" src={a.images.jpg.image_url}/>
-          <Button onClick = {() => handleClick(a)}> Watched </Button>
+          {animeData.map((a)=><div className= "anime"> <img  width="50" height="55" src={a.images.jpg.image_url}/>
+          <li><a href = {a.url}>{a.title} </a> 
+          <But id = "watched" onClick = {() => handleClick(a)}> Watched </But>
           </li></div>)
 
          } </div>
@@ -172,6 +172,15 @@ const Wrapper = styled.section`
   display: flex;
   gap: 24px;
 `;
+//"Watched" button styling
+const But = styled.button`
+  background-color: lightblue;
+  border-radius: 4px  
+  float: right;
+
+
+`;
+
 
 const WrapperChild = styled.div`
   flex: 1;
