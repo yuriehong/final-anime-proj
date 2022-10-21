@@ -7,30 +7,42 @@ import { Button, FormField, Input, Label } from "../styles";
 function NewAnime({ user}) {
   const [rating, setRating] = useState(0)
   const [comment, setComment] = useState("")
+  const [showR, setShowR] = useState(false)
+
   const [anime, setAnime] = useState("")
   const [search, setSearch] = useState("")
   const [animeData, setAnimeData] = useState([]);
+  const [displayData, setDisplayData] = useState(false)
 
 
  
 
   const searchR = (searchTerm) => {
     return fetch(
-      `https://api.jikan.moe/v3/search/anime?q=${searchTerm}&limit=5`
+      `https://api.jikan.moe/v4/anime?q=${searchTerm}&limit=5`
     ).then((response) => response.json());
   };
-  const handleSearch = (e) => {
+function handleSearch(e){
     e.preventDefault();
-    searchR.search(search).then((data) => {
-      search.setData(data.results);
-      history.push('/');
+    searchR(search).then((data) => {
+      setAnimeData(data.data);
+      // history.push('/');
     });
-  };
+    setDisplayData(!displayData)
+  }
+  console.log(animeData)
 
 
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
+
+  //add searched anime to watchedlist through new review
+  function handleClick(a) {
+    setAnime(a)
+    setShowR(!showR)
+
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -66,11 +78,9 @@ function NewAnime({ user}) {
                 placeholder="Search for your favorite anime..."
                 value={search}
                 onChange={(event) => setSearch(event.target.value)}
-                className="home__input"
               />
               <button
                 variant="contained"
-                color="primary"
                 type="submit"
                 disabled={!search}
                 onClick={handleSearch}
@@ -78,10 +88,21 @@ function NewAnime({ user}) {
               </FormField>
               </form>
 
-             
+        {displayData ? 
+        <div>
+          <h1>Results: </h1>
+          {animeData.map((a)=><div className= "anime"> 
+          <li><a href = {a.images.jpg.image_url}>{a.title} </a> <img src={a.images.jpg.image_url}/>
+          <Button onClick = {handleClick}> Watched </Button>
+          </li></div>)
+
+         } </div>
+         : <p></p>}  
+
+         {showR ?
         <form onSubmit={handleSubmit}>
           <FormField>
-            
+            <h1>New Review</h1>
             <Label htmlFor="rating">Rating</Label>
             <Input
               type="integer"
@@ -109,6 +130,8 @@ function NewAnime({ user}) {
       {errors? <div>{errors}</div>:null}
           </FormField>
         </form>
+        : <p></p>
+         }
       </WrapperChild>
       
     </Wrapper>
