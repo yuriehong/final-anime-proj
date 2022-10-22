@@ -1,14 +1,12 @@
 Rails.application.routes.draw do
   resources :reviews, only: [:index, :show, :create, :destroy, :update]
   resources :animes, only: [:index, :show, :create, :destroy]
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  resources :users, only: [:index]
+  resources :users, only: [:index, :show]
   post "/signup", to: "users#create"
-  get "/me", to: "users#show"
+  get "/me", to: "users#me"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
-  # get '/hello', to: 'application#hello_world'
 
   get '*path',
       to: 'fallback#index',

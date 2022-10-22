@@ -4,6 +4,9 @@ function Review({myReview, user, anime, setReviews}) {
     const[showEdit, setShowEdit] = useState(false)
     const [rating, setRating] = useState(myReview.rating)
     const [comment, setComment] = useState(myReview.comment)
+    const [username, setUsername] = useState(user.id)
+
+
 
       //handling edit review form submission
     function handleEdit(e){
@@ -52,14 +55,18 @@ function Review({myReview, user, anime, setReviews}) {
       setShowEdit(!showEdit)
     }
   
-     
+     function getUser(id){
+      fetch(`/users/${id}`)
+        .then((r) => r.json())
+        .then(data => setUsername(data.username))
+     }
     
     return (
         <div>
           <h4>Rating: {myReview.rating} / 10</h4>
           <h4>Comment: </h4>
           <p>{myReview.comment}</p>
-          <i>Created by: {user.username} </i>
+          <i>Created by: {username}{getUser(myReview.user_id)} </i>
 
           <button id = "button" onClick = {handleClick}>Delete Review</button> 
           <button id = "button" onClick = {onEditClick}>Edit Review</button> 

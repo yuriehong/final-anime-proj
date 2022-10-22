@@ -12,6 +12,10 @@ class UsersController < ApplicationController
     end
 
     def show
+        user = User.find(params[:id])
+        render json: user, status: :ok
+    end
+    def me
         render json: @current_user, status: :ok
     end
 

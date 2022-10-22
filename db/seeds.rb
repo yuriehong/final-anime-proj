@@ -43,6 +43,8 @@ r4 = Review.create!(rating: 7, comment: "Unique and funny characters, mystery, a
 r5 = Review.create!(rating: 10, comment:"I really really love this show! The MC is overpowered, smart, adorable and a badass! I just love how this show is progressing. I want to watch more about Rimurus adventures and i want to see his little goblin village grow even more. I love the characters, they are all interesting and lovable. I can not get enough of this super awesome anime!!! Great job to the people who made this. Thank you so much!", anime_id:a5.id, user_id: u2.id)
 r6 = Review.create!(rating: 8, comment:"Manga readers already know... The anime has so much potential, and they did such a good job, especially on the first episode, that opening- a masterpiece. Love this with all my heart!!
     Honestly, I can't wait to see how this all will play out! I really hope it doesn't fail", anime_id:a6.id, user_id: u1.id)
+r7 = Review.create!(rating: 10, comment:"lit", anime_id:a1.id, user_id: u2.id)
+
 
 
 puts "✅ Done seeding!"

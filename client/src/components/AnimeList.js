@@ -37,23 +37,28 @@ function onUpdateAnime(){
   }, []);
 
   //filter by genre
-  // let animesToDisplay = animes.filter(item => {
-  //   if (category === "All") {
-  //     return true
-  //   }
-  //   else {
-  //     return (item.category === category)
-  //   }
-  // });
+  let animesToDisplay = animes.filter(item => {
+    if (category === "All") {
+      return true
+    }
+    else {
+      return (item.genre === category)
+    }
+  });
 
   return (
     <Wrapper>
-      {/* <select id="selectform" value={category} onChange={(e) => setCategory(e.target.value)} >
+      <select id="selectform" value={category} onChange={(e) => setCategory(e.target.value)} >
             <option value="All">Filter By Category</option>
+            <option value="Action">Action</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Adventure">Adventure</option>
+            <option value="Shonen">Shonen</option>
 
-          </select> */}
+
+          </select>
       {animes.length > 0 ? (
-        animes.map((anime, i) => (
+        animesToDisplay.map((anime, i) => (
          <Anime key = {i} user={user} anime ={anime} onRemoveAnime = {onRemoveAnime} />
         ))
       ) : (

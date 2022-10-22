@@ -16,20 +16,20 @@ function Anime({user, anime, onRemoveAnime}) {
 const [errors, setErrors] = useState([]);
 
 //Show reviews for the anime when show review button is clicked
-// function handleReviews() {
-//     if(showReviews == false){
-//     fetch(`/animes/${anime.id}`)
-//     .then(resp => resp.json())
-//     .then(data => setReviews(data.reviews))
+function handleReviews() {
+    if(showReviews == false){
+    fetch(`/animes/${anime.id}`)
+    .then(resp => resp.json())
+    .then(data => setReviews(data.reviews))
 
-//     }
-//     else{
-//       console.log("changing to none")
-//       setReviews([])
+    }
+    else{
+      console.log("changing to none")
+      setReviews([])
       
-//     }
-//     setShowReviews(!showReviews)
-// }
+    }
+    setShowReviews(!showReviews)
+}
 
  //delete anime from watched list
  function handleDelete() {
@@ -57,18 +57,14 @@ return (
         <b>Genre: {anime.genre}</b>
         &nbsp;·&nbsp;
         <br></br>
-        <cite>Created By: {user.username}</cite>
       </p>
       <p><b>Summary</b>: {anime.summary}</p>
-      {/* <Button onClick= {handleReviews}>{showReviews ? "Hide Reviews": "Show Reviews"}</Button> */}
+      <Button onClick= {handleReviews}>{showReviews ? "Hide Reviews": "Show Reviews"}</Button> 
     
-      {/* <div >
+      <div >
         <ul > {reviews.map(review => <Review myReview={review} user ={user} anime = {anime} setReviews= {setReviews} reviews = {reviews} key ={review.id} />)} </ul>
-      </div> */}
-      {/* {!showReviews ? 
-      <Button id="newR" onClick = {handleNew}>New Review</Button> : <p></p>}
-      {showForm ? <NewReview user = {user} anime = {anime} reviews = {reviews} setReviews = {setReviews}/> : ""} 
-       */}
+      </div> 
+      
 
     </Box>
   </Rec>
