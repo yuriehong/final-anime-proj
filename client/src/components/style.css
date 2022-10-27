@@ -6,6 +6,8 @@
 }
 body{
     background-color: #F9F6EE;
+    padding-top: 65px; 
+
     
 }
 .header{
@@ -16,7 +18,6 @@ body{
     justify-content: space-around;
     align-items: center;
     position: fixed;
-    top: 0;
     color: white;
     z-index: 10;
 }
@@ -28,40 +29,65 @@ body{
     font-size: 1.2rem;
     padding: 0 1rem;
     gap: 20px;
+
 }
 
 #search {
     width: 100%;
-    margin: 100px auto;
+    margin: 25px 300px;
     display: flex;
-    top: 1000px
+}
+#review{
+    padding: 2rem 0 1rem 0;
+    border: 1px solid darkblue;
+    background-color: aliceblue;
+    top: 50px;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+
 }
 
-.anime-row{
+#summary{
+    padding: 2rem 0 1rem 0;
+    border: 1px solid darkblue;
+    background-color: aliceblue;
+    top: 50px;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+
+}
+
+.top{
     display: flex;
     flex-direction: column;
 }
 .cardList{
     display: grid;
-    grid-gap: 16px;
-
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 50px;
+    align-items: stretch;
 
 }
 .card{
-    width: 500px;
-    height: 300px;
+    width: 300px;
+    height: 400px;
     box-shadow: 5px 5px 5px rgba(0,0,0,0.3);
     text-align: center;
     position: relative;
     display: flex;
-    background: #303035;
+    background: #6a6a6f;
     border-radius: 7px;
 }
 .card img{
-    width: 100%;
-    height: 80%;
+    width: 250px;
+    height: 200px;
+    padding: 5;
 }
+.card p{
+    padding: 10px;
+  }
 
 
 .mylist{

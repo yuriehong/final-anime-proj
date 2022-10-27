@@ -27,7 +27,7 @@ const ButtonBase = styled.button`
   font-size: 1rem;
   border: 1px solid transparent;
   border-radius: 6px;
-  padding: 8px 16px;
+  padding: 6px 8px;
   text-decoration: none;
 `;
 
@@ -43,7 +43,7 @@ const FillButton = styled(ButtonBase)`
 const OutlineButton = styled(ButtonBase)`
   background-color: white;
   color: var(--main);
-  border: 2px solid var(--main);
+  border: 1px solid var(--main);
 
   &:hover {
     background: hsl(235deg 85% 97%);

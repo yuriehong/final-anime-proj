@@ -5,16 +5,38 @@ import styled from "styled-components";
 import { Button } from "../styles";
 import Anime from "./Anime.js"
 
-function AnimeList({user, getAnimes}) {
+function AnimeList({user}) {
   const [animes, setAnimes] = useState([]);
   const [reviews, setReviews] = useState([]);
-
+  // const [avgRatings, setAvgRatings] = useState(0)
   const [category, setCategory] = useState("All")
 
+  //filter by genre
+  let animesToDisplay = animes.filter(item => {
+    if (category === "All") {
+      return true
+    }
+    else {
+      return (item.genre === category)
+    }
+  });
 //removes anime for the frontend
 function onRemoveAnime(anime) {
     setAnimes(animes.filter((a) => a.id !== anime.id))
+    fetch("/animes")
+      .then((r) => r.json())
+      .then(setAnimes);
   }
+
+  //top 3
+  // useEffect(() =>{
+  //   fetch(`/avg/${anime.id}`)
+  //   .then(resp => resp.json())
+  //   .then(data => setAvgRating(data))}, [reviews]
+  //   )
+
+  // let top3 = (animesToDisplay.sort((a,b)=> b.rating -a.rating)).slice(0,3) 
+  // console.log(top3)
 
 //refreshes the animes
 function onUpdateAnime(){
@@ -30,15 +52,7 @@ function onUpdateAnime(){
       .then(setAnimes);
   }, []);
 
-  //filter by genre
-  let animesToDisplay = animes.filter(item => {
-    if (category === "All") {
-      return true
-    }
-    else {
-      return (item.genre === category)
-    }
-  });
+  
 
   return (
     <Wrapper>
@@ -51,6 +65,7 @@ function onUpdateAnime(){
 
 
           </select>
+                  
           <div className = "cardList">
       {animes.length > 0 ? (
         animesToDisplay.map((anime) => (
@@ -69,8 +84,8 @@ function onUpdateAnime(){
   )
       }
 const Wrapper = styled.section`
-  max-width: 800px;
-  margin: 40px auto;
+  max-width: 1000px;
+  margin: 25px auto;
 `;
 
 

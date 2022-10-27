@@ -22,6 +22,8 @@ function NavBar({ user, setUser }) {
         <Link to="/">My Animes</Link>
       </Logo>
       <Nav>
+        <Link to="/topAnimes">Top Animes</Link>
+
         <Button as={Link} to="/new">
           Add Anime
         </Button>

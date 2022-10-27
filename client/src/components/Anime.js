@@ -8,6 +8,8 @@ import Review from "./Review.js"
 
 function Anime({user, anime, onRemoveAnime}) {
     const [showReviews, setShowReviews] = useState(false)
+    const [showSummary, setShowSummary] = useState(false)
+
     const [reviews, setReviews] = useState([])
     const [showForm, setShowForm] = useState(false)
     const [avgRating, setAvgRating] = useState(0)
@@ -51,7 +53,9 @@ function handleReviews() {
       
     }
  
-
+function showSum(){
+  setShowSummary(!showSummary)
+}
 return (
     <div className= "card" key={anime.id}>
     <Box>
@@ -67,14 +71,16 @@ return (
         <b>Average Rating: {avgRating}</b>
       <br></br>
       </p>
-      <p><b>Summary</b>: {anime.summary}</p>
+      <Button onClick= {showSum}>{showSummary ? "Hide Summary": "Show Summary"}</Button> 
+      {showSummary? 
+      <p id= "summary"><b>Summary</b>: {anime.summary}</p>: <p></p>
+
+}
       <Button onClick= {handleReviews}>{showReviews ? "Hide Reviews": "Show Reviews"}</Button> 
     
       <div >
-        <ul > {reviews.map(review => <Review myReview={review} user ={user} anime = {anime} setReviews= {setReviews} reviews = {reviews} key ={review.id} />)} </ul>
+        <ul > {reviews.map(review => <Review myReview={review} user ={user} anime = {anime} onRemoveAnime = {onRemoveAnime} setReviews= {setReviews} reviews = {reviews} key ={review.id} />)} </ul>
       </div> 
-      
-
     </Box>
   </div>
 

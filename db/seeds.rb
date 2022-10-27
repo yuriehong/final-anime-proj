@@ -44,6 +44,8 @@ r5 = Review.create!(rating: 10, comment:"I really really love this show! The MC 
 r6 = Review.create!(rating: 8, comment:"Manga readers already know... The anime has so much potential, and they did such a good job, especially on the first episode, that opening- a masterpiece. Love this with all my heart!!
     Honestly, I can't wait to see how this all will play out! I really hope it doesn't fail", anime_id:a6.id, user_id: u1.id)
 r7 = Review.create!(rating: 10, comment:"lit", anime_id:a1.id, user_id: u2.id)
+r8 = Review.create!(rating: 8, comment: "Favorit anime of all time!", anime_id:a2.id, user_id: u2.id)
+
 
 
 

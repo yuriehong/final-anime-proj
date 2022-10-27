@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 
-function Review({myReview, user, anime, setReviews}) {
+function Review({myReview, user, onRemoveAnime, anime, setReviews}) {
     const[showEdit, setShowEdit] = useState(false)
     const [rating, setRating] = useState(myReview.rating)
     const [comment, setComment] = useState(myReview.comment)
@@ -11,7 +11,6 @@ function Review({myReview, user, anime, setReviews}) {
       //handling edit review form submission
     function handleEdit(e){
       e.preventDefault()
-      //updating review
       fetch(`/reviews/${myReview.id}`, {
         method : "PATCH",
         headers : {
@@ -41,8 +40,9 @@ function Review({myReview, user, anime, setReviews}) {
         .then((r) => {
           if (r.ok) {
             fetch(`/animes/${anime.id}`)
-    .then(resp => resp.json())
-    .then(data => setReviews(data.reviews))
+        .then(resp => resp.json())
+        .then(data => setReviews(data.reviews))
+        onRemoveAnime(anime)
           
         } else {
             r.json().then((err) => alert(err.error));
@@ -62,7 +62,7 @@ function Review({myReview, user, anime, setReviews}) {
      }
     
     return (
-        <div>
+        <div id = "review">
           <h4>Rating: {myReview.rating} / 10</h4>
           <h4>Comment: </h4>
           <p>{myReview.comment}</p>

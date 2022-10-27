@@ -9,7 +9,6 @@ import './style.css';
 
 function App() {
   const [user, setUser] = useState(null);
-  const [animes, setAnimes] = useState([]);
 
 
   useEffect(() => {
@@ -21,11 +20,7 @@ function App() {
     });
   }, []);
 
-  function getAnimes(){
-    fetch("/animes")
-      .then((r) => r.json())
-      .then(setAnimes);
-  }
+
 
 
   if (!user) return <Login onLogin={setUser} />;
