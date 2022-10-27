@@ -3,7 +3,6 @@ class CreateAnimes < ActiveRecord::Migration[7.0]
     create_table :animes do |t|
       t.string :title
       t.string :image
-      t.integer :year
       t.string :genre
       t.string :summary
 

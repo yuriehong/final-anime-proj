@@ -1,5 +1,7 @@
 class AnimesController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :invalid
+    rescue_from ActiveRecord::RecordNotFound, with: :not_found
+
 
     before_action :authorize
     skip_before_action :authorize, only: [:create, :show]
@@ -30,6 +32,7 @@ class AnimesController < ApplicationController
         reviews = Anime.find(params[:id]).reviews
         reviews.each{|review| sum += review.rating}
         sum.fdiv(reviews.size)
+        render json: sum.fdiv(reviews.size), status: :created
     end
 
 
@@ -41,4 +44,8 @@ class AnimesController < ApplicationController
     def invalid
         render json: { error: "Invalid" }, status: :unprocessable_entity
     end
+    def not_found
+        render json: { error: "Anime not found"}, status: :not_found
+    end
 end
+

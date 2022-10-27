@@ -19,16 +19,16 @@ function NavBar({ user, setUser }) {
   return (
     <Wrapper>
       <Logo>
-        <Link to="/">Watched Animes</Link>
+        <Link to="/">My Animes</Link>
       </Logo>
       <Nav>
         <Button as={Link} to="/new">
-          New Watched Anime
+          Add Anime
         </Button>
         <Button variant="outline" onClick={handleLogoutClick}>
           Logout
         </Button>
-        <h4>Welcome <em>{user.username}</em></h4>
+        <p>Welcome {user.username}</p>
       </Nav>
     </Wrapper>
   );
@@ -36,10 +36,16 @@ function NavBar({ user, setUser }) {
 
 const Wrapper = styled.header`
   font-family: Chango;
+  width: 100%;
+  height: 80px;
+  background-color: #41403d;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  padding: 8px;
+  position: fixed;
+  top: 0;
+  color: white;
+   z-index: 10;
 `;
 
 const Logo = styled.h1`

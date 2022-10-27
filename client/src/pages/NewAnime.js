@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
 import { Button, FormField, Input, Label } from "../styles";
@@ -10,73 +10,54 @@ function NewAnime({ user}) {
   const [showR, setShowR] = useState(false)
 
   const [anime, setAnime] = useState("")
+  const [animes, setAnimes] = useState([]);
   const [search, setSearch] = useState("")
   const [animeData, setAnimeData] = useState([]);
   const [displayData, setDisplayData] = useState(false)
 
-
- 
-
-  const searchR = (searchTerm) => {
-    return fetch(
-      `https://api.jikan.moe/v4/anime?q=${searchTerm}&limit=5`
-    ).then((response) => response.json());
-  };
-function handleSearch(e){
-    e.preventDefault();
-    searchR(search).then((data) => {
-      setAnimeData(data.data);
-      // history.push('/');
-    });
-    setDisplayData(!displayData)
-  }
-  console.log(animeData)
-
-
+  
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
+
+
+  //search call
+  const getSearch=async()=>{
+    const res=await fetch(`https://api.jikan.moe/v4/anime?q=${search}&limit=5`)
+    const resData= await res.json();
+    setAnimeData(resData.data)
+}
+useEffect(() => {
+  fetch("/animes")
+    .then((r) => r.json())
+    .then(setAnimes);
+}, []);
+
+
+  
+function handleSearch(e){
+    e.preventDefault();
+    getSearch();
+    setDisplayData(!displayData)
+    
+  }
+  console.log(animeData)
+
 
   //add searched anime to watchedlist through new review
   function handleClick(a) {
     setAnime(a)
     setShowR(!showR)
     console.log(a)
-
-
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    setIsLoading(true);
+  function postReview(data){
     let newRev = {
-      "rating": rating,
+      "rating": parseInt(rating),
       "comment": comment,
-      "anime_id": anime.mal_id,
+      "anime_id": data.id,
       "user_id": user.id   }
-      let newAni = {
-        "id": anime.mal_id,
-        "title": anime.title,
-        "image": anime.images.jpg.image_url,
-        "year": anime.year,
-        "genre": anime.genres[0].name,
-        "summary": anime.synopsis
-      }
-      console.log(newAni)
-      console.log(newRev)
-      fetch("/animes", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newAni),
-      }).then((r) => {
-        setIsLoading(false);
-        if (r.ok) {
-        } else {
-          r.json().then((err) => setErrors(err.error));
-        }
-      });
+
     fetch("/reviews", {
       method: "POST",
       headers: {
@@ -84,23 +65,64 @@ function handleSearch(e){
       },
       body: JSON.stringify(newRev),
     }).then((r) => {
+
       setIsLoading(false);
       if (r.ok) {
-        // setReviews([...reviews, newRev])
-        history.push("/");
-
-        
+        console.log("review posted")             
       } else {
-        r.json().then((err) => setErrors(err.error));
+        r.json().then((err) => setErrors(err.error))
       }
-    });
+    })
+    .catch(error => {
+      console.log(error)
+    })
+    history.push("/");
+
+  }
+
+  //submit new review, add new anime to watched list
+  function handleSubmit(e) {
+    e.preventDefault();
+    setErrors([]);
+    setIsLoading(true);
+    console.log(animes)
+    let i = animes.findIndex((a) => {return a.id == anime.mal_id})
+    console.log(i)
+    let newAni = {
+        "id": anime.mal_id,
+        "title": anime.title,
+        "image": anime.images.jpg.image_url,
+        "year": anime.year,
+        "genre": anime.genres[0].name,
+        "summary": anime.synopsis
+      }
+    
+      console.log(newAni)
+      if (i<0){
+      fetch("/animes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newAni),
+      })
+      .then(r => r.json())
+      .then(data => {
+        setAnimes([...animes, newAni])
+        postReview(data)
+      });
+    }
+    else{
+      setErrors([...errors, "Already in anime list"])
+    }
+
   }
 
   return (
     <Wrapper>
       <WrapperChild>
-        <form className="home__form">
-            <FormField type="submit" className="home__formControl">
+        <form id="search">
+            <FormField type="submit" >
               <Input
                 placeholder="Search for your favorite anime..."
                 value={search}
@@ -118,9 +140,9 @@ function handleSearch(e){
         {displayData ? 
         <div>
           <h1>Results: </h1>
-          {animeData.map((a)=><div className= "anime"> <img  width="50" height="55" src={a.images.jpg.image_url}/>
+          {animeData.map((a)=><div key = {a.mal_id} className= "anime"> <img  width="50" height="55" src={a.images.jpg.image_url}/>
           <li><a href = {a.url}>{a.title} </a> 
-          <But id = "watched" onClick = {() => handleClick(a)}> Watched </But>
+          <But id = "watched" onClick = {() => handleClick(a)}> Add to list </But>
           </li></div>)
 
          } </div>
@@ -135,7 +157,7 @@ function handleSearch(e){
               type="integer"
               id="name"
               value={rating}
-              onChange={(e) => setRating(e.target.value)}
+              onChange={(e) => setRating((e.target.value))}
             />
           </FormField>
           <FormField>
@@ -171,6 +193,7 @@ const Wrapper = styled.section`
   padding: 16px;
   display: flex;
   gap: 24px;
+    
 `;
 //"Watched" button styling
 const But = styled.button`

@@ -1,4 +1,4 @@
-import {useState } from "react";
+import {useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
@@ -10,10 +10,18 @@ function Anime({user, anime, onRemoveAnime}) {
     const [showReviews, setShowReviews] = useState(false)
     const [reviews, setReviews] = useState([])
     const [showForm, setShowForm] = useState(false)
+    const [avgRating, setAvgRating] = useState(0)
 
 
 
 const [errors, setErrors] = useState([]);
+
+//gets avg rating
+useEffect(() =>{
+fetch(`/avg/${anime.id}`)
+.then(resp => resp.json())
+.then(data => setAvgRating(data))}, [reviews]
+)
 
 //Show reviews for the anime when show review button is clicked
 function handleReviews() {
@@ -40,23 +48,24 @@ function handleReviews() {
       } else {
         r.json().then((err) => alert(err.error));
       }})
+      
     }
  
 
 return (
-    <Rec key={anime.id}>
+    <div className= "card" key={anime.id}>
     <Box>
-      <Button onClick ={() => handleDelete()}>Delete</Button>
-      {/* <Button variant="outline" onClick = {() => setShowEdit(!showEdit)}>Edit </Button> */}
-      
+     
       <h2 className = "font-link">{anime.title}</h2>
       <img  src ={anime.image} width="400" height="400" alt = {anime.title}/>
       <p>
       <b>Year: {anime.year}</b>
       <br></br>
-        <b>Genre: {anime.genre}</b>
+        <b>Genre: {anime.genre}</b> 
         &nbsp;·&nbsp;
         <br></br>
+        <b>Average Rating: {avgRating}</b>
+      <br></br>
       </p>
       <p><b>Summary</b>: {anime.summary}</p>
       <Button onClick= {handleReviews}>{showReviews ? "Hide Reviews": "Show Reviews"}</Button> 
@@ -67,13 +76,10 @@ return (
       
 
     </Box>
-  </Rec>
+  </div>
 
 
 )
 
 }
-const Rec= styled.article`
-  margin-bottom: 24px;
-`;
 export default Anime

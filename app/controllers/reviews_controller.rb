@@ -3,8 +3,8 @@ class ReviewsController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
 
-    before_action :authorize
-    skip_before_action :authorize, only: [:create,:destroy]
+    # before_action :authorize
+    skip_before_action :authorize, only: [:index, :create,:destroy]
 
     def index
         reviews = Review.all
@@ -35,7 +35,7 @@ class ReviewsController < ApplicationController
 
     private 
     def review_params
-       params.permit([:rating, :comment, :anime_id, :user_id]) 
+       params.permit([:rating, :comment, :anime_id, :user_id, :anime]) 
     end
 
     def not_found

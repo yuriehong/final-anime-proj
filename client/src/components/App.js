@@ -4,9 +4,13 @@ import NavBar from "./NavBar";
 import Login from "../pages/Login";
 import AnimeList from "../components/AnimeList";
 import NewAnime from "../pages/NewAnime";
+import './style.css';
+
 
 function App() {
   const [user, setUser] = useState(null);
+  const [animes, setAnimes] = useState([]);
+
 
   useEffect(() => {
     // auto-login
@@ -16,6 +20,13 @@ function App() {
       }
     });
   }, []);
+
+  function getAnimes(){
+    fetch("/animes")
+      .then((r) => r.json())
+      .then(setAnimes);
+  }
+
 
   if (!user) return <Login onLogin={setUser} />;
 
@@ -28,7 +39,7 @@ function App() {
             <NewAnime user={user} />
           </Route>
           <Route path="/">
-            <AnimeList user ={user} key = {user.id}/>
+            <AnimeList user ={user} />
           </Route>
         </Switch>
       </main>

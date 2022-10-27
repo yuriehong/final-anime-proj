@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { Button } from "../styles";
 import Anime from "./Anime.js"
 
-function AnimeList({user}) {
+function AnimeList({user, getAnimes}) {
   const [animes, setAnimes] = useState([]);
   const [reviews, setReviews] = useState([]);
 
@@ -23,12 +23,6 @@ function onUpdateAnime(){
       .then(setAnimes);
   }
 
-//get animes
-  useEffect(() => {
-    fetch("/reviews")
-      .then((r) => r.json())
-      .then(setReviews);
-  }, []);
 
   useEffect(() => {
     fetch("/animes")
@@ -57,9 +51,10 @@ function onUpdateAnime(){
 
 
           </select>
+          <div className = "cardList">
       {animes.length > 0 ? (
-        animesToDisplay.map((anime, i) => (
-         <Anime key = {i} user={user} anime ={anime} onRemoveAnime = {onRemoveAnime} />
+        animesToDisplay.map((anime) => (
+         <Anime key = {anime.id} user={user} anime ={anime} onRemoveAnime = {onRemoveAnime} />
         ))
       ) : (
         <>
@@ -69,6 +64,7 @@ function onUpdateAnime(){
           </Button>
         </>
       )}
+      </div>
     </Wrapper>
   )
       }
