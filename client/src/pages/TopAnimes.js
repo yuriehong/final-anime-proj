@@ -1,42 +1,36 @@
 import { useState, useEffect } from "react";
-import { useHistory } from "react-router";
 import styled from "styled-components";
-import { Button, FormField, Input, Label } from "../styles";
+import Anime from "../components/Anime.js"
 
 function TopAnimes({ user}) {
+    const [topAnimes, setTopAnimes] = useState([]);
 
-    const [topAnimes, setTopAnimes] = []
+    useEffect(() => {
+      fetch("/topAnimes")
+        .then((r) => r.json())
+        .then(data => setTopAnimes(data))
+      }, []);
+
+  console.log(topAnimes)
+
 
     return (
+      <Wrapper>
+        <h2> Top 3 Animes </h2>
         <div className = "cardList">
-        {animesToDisplay.map((anime) => (
-           <Anime key = {anime.id} />
+        {topAnimes.map((anime) => (
+           <Anime user = {user} anime = {anime} />
         ))}
         </div>
-          
+          </Wrapper>
     )
 }
-    const Wrapper = styled.section`
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 16px;
-      display: flex;
-      gap: 24px;
-        
-    `;
-    //"Watched" button styling
-    const But = styled.button`
-      background-color: lightblue;
-      border-radius: 4px  
-      float: right;
-    
-    
-    `;
-    
-    
-    const WrapperChild = styled.div`
-      flex: 1;
-    `;
+
+const Wrapper = styled.section`
+max-width: 1000px;
+margin: 25px auto;
+`;
+   
             
-    export default TopAnimes;
+  export default TopAnimes;
 

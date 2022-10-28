@@ -1,7 +1,8 @@
 import React from "react";
-import { Link, BrowserRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "../styles";
+import './style.css';
 
 function NavBar({ user, setUser }) {
   function handleLogoutClick() {
@@ -22,7 +23,7 @@ function NavBar({ user, setUser }) {
         <Link to="/">My Animes</Link>
       </Logo>
       <Nav>
-        <Link to="/topAnimes">Top Animes</Link>
+        <Link to="/topAnimes" id = "topAnimesTitle">Top Animes</Link>
 
         <Button as={Link} to="/new">
           Add Anime

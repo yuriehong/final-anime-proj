@@ -4,6 +4,7 @@ import NavBar from "./NavBar";
 import Login from "../pages/Login";
 import AnimeList from "../components/AnimeList";
 import NewAnime from "../pages/NewAnime";
+import TopAnimes from "../pages/TopAnimes";
 import './style.css';
 
 
@@ -33,9 +34,13 @@ function App() {
           <Route path="/new">
             <NewAnime user={user} />
           </Route>
+          <Route path="/topAnimes">
+            <TopAnimes user = {user}/>
+          </Route>
           <Route path="/">
             <AnimeList user ={user} />
           </Route>
+        
         </Switch>
       </main>
     </div>

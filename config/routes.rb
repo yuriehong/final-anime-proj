@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
   get "/avg/:id", to: "animes#avgrating"
+  get "/topAnimes", to: "animes#topAnimes"
 
   get '*path',
       to: 'fallback#index',

@@ -35,6 +35,33 @@ class AnimesController < ApplicationController
         render json: sum.fdiv(reviews.size), status: :created
     end
 
+    def topAnimes
+        animes = Anime.all
+        top = []
+        ratings = Hash.new
+        sum = 0;
+
+        animes.each {|anime| 
+            reviews = anime.reviews;
+
+            if reviews.size == 0
+                avgrate= 0
+            else
+
+            reviews.each{|review| sum += review.rating};
+            avgrate = sum.fdiv(reviews.size);
+            end
+            ratings[anime] = avgrate;
+            
+            avgrate =0
+            sum =0
+        }
+        ratings = ratings.sort_by {|k, v| v}.reverse
+        ratings = ratings.slice(0,3)
+        ratings.each{|a| top.append(a[0])}
+        render json: top, status: :created
+    end
+
 
     private 
     def anime_params
