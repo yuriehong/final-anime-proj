@@ -4,21 +4,40 @@ import Anime from "../components/Anime.js"
 
 function TopAnimes({ user}) {
     const [topAnimes, setTopAnimes] = useState([]);
+    const [topNum, setTopNum] = useState(1);
+
 
     useEffect(() => {
       fetch("/topAnimes")
         .then((r) => r.json())
-        .then(data => setTopAnimes(data))
+        .then(data => {
+          setTopAnimes(data)
+        
+        })
       }, []);
 
-  console.log(topAnimes)
+  // function handleSelect(val){
+  //     setTopNum(val)
+  //     console.log(topNum)
+  //       if (topNum === "10") {
+  //         setAnimesToShow(topAnimes.slice(0,10))
+  //       }
+  //       else  {
+  //         setAnimesToShow(topAnimes.slice(0,5))
+  //       }
+    
+  //     };
 
-
+  let animesToShow = topAnimes.slice(0,5)
     return (
       <Wrapper>
-        <h2> Top 3 Animes </h2>
+        <h1> Top 5 Animes </h1>
+        {/* <select id="selectform" value={topNum} onChange={(e) => {handleSelect(e.target.value)}}>
+            <option value="5">Top 5 Animes</option>
+            <option value="10">Top 10 Anime</option>
+          </select> */}
         <div className = "cardList">
-        {topAnimes.map((anime) => (
+        {animesToShow.map((anime) => (
            <Anime user = {user} anime = {anime} />
         ))}
         </div>

@@ -28,22 +28,6 @@ function onRemoveAnime(anime) {
       .then(setAnimes);
   }
 
-  //top 3
-  // useEffect(() =>{
-  //   fetch(`/avg/${anime.id}`)
-  //   .then(resp => resp.json())
-  //   .then(data => setAvgRating(data))}, [reviews]
-  //   )
-
-  // let top3 = (animesToDisplay.sort((a,b)=> b.rating -a.rating)).slice(0,3) 
-  // console.log(top3)
-
-//refreshes the animes
-function onUpdateAnime(){
-  fetch("/animes")
-      .then((r) => r.json())
-      .then(setAnimes);
-  }
 
 
   useEffect(() => {

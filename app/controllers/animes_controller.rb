@@ -57,7 +57,7 @@ class AnimesController < ApplicationController
             sum =0
         }
         ratings = ratings.sort_by {|k, v| v}.reverse
-        ratings = ratings.slice(0,3)
+        # ratings = ratings.slice(0,3)
         ratings.each{|a| top.append(a[0])}
         render json: top, status: :created
     end

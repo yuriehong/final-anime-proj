@@ -43,8 +43,10 @@ body{
     background-color: aliceblue;
     top: 50px;
     text-align: center;
-    overflow: hidden;
     position: relative;
+    overflow: hidden;
+    z-index: 2;
+
 
 }
 #topAnimesTitle{
