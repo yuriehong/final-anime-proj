@@ -1,24 +1,25 @@
 # README
+Description:
+An anime list app where users can search an extensive anime list to add animes to their list, rate animes, add reviews, edit reviews, delete reviews which deletes the anime from their list, and see the top animes for all the users based on their reviews.
+•install postgresql:
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+$ sudo apt update
 
-Things you may want to cover:
+$ sudo apt install postgresql postgresql-contrib libpq-dev
 
-* Ruby version
+start the postgresql service: $ sudo service postgresql start
 
-* System dependencies
+Create a database user so that you are able to connect to the database from Rails:
 
-* Configuration
+run $ whoami to check your operating system username ("username")
 
-* Database creation
+create a user by running $ sudo -u postgres -i
 
-* Database initialization
+$ createuser -sr "username"
+•run bundle install
 
-* How to run the test suite
+•run rails s to start up the server
 
-* Services (job queues, cache servers, search engines, etc.)
+•run npm install, npm start --prefix client to start up the backend
 
-* Deployment instructions
-
-* ...
+•This application uses Rails 7.
