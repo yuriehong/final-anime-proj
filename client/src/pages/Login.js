@@ -3,11 +3,14 @@ import styled from "styled-components";
 import LoginForm from "../components/LoginForm";
 import SignUpForm from "../components/SignUpForm";
 import { Button } from "../styles";
+import './loginstyle.css';
+
 
 function Login({ onLogin }) {
   const [showLogin, setShowLogin] = useState(true);
 
   return (
+    <div id ="login">
     <Wrapper>
       <Logo className ="font-link">Watashi no Animes</Logo>
       {showLogin ? (
@@ -34,6 +37,7 @@ function Login({ onLogin }) {
         </>
       )}
     </Wrapper>
+    </div>
   );
 }
 
