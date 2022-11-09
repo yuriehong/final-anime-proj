@@ -1,6 +1,10 @@
 # README
 Description:
 An anime list app where users can search an extensive anime list to add animes to their list, rate animes, add reviews, edit reviews, delete reviews which deletes the anime from their list, and see the top animes for all the users based on their reviews.
+![image](https://user-images.githubusercontent.com/54913649/200929042-f75d2ca4-fe75-464b-b1d1-de227771371e.png)
+
+![image](https://user-images.githubusercontent.com/54913649/200929314-83335034-9115-44d2-8e22-6e64c8a1d212.png)
+
 •install postgresql:
 
 $ sudo apt update
