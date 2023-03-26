@@ -64,8 +64,9 @@ body{
     background-color: aliceblue;
     top: 50px;
     text-align: center;
-    overflow: hidden;
     position: relative;
+    z-index: 2;
+
 
 }
 
