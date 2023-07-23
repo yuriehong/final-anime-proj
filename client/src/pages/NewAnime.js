@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
-import { Button, FormField, Input, Label } from "../styles";
+import {Box, FormField, Input, Label } from "../styles";
 
 
 function NewAnime({ user}) {
@@ -150,6 +150,7 @@ function handleSearch(e){
 
          {showR ?
         <form onSubmit={handleSubmit}>
+          <FormBox>
           <FormField>
             <h1>New Review</h1>
             <Label htmlFor="rating">Rating</Label>
@@ -160,6 +161,7 @@ function handleSearch(e){
               onChange={(e) => setRating((e.target.value))}
             />
           </FormField>
+  
           <FormField>
             <Label htmlFor="comment">Comment</Label>
             <Input
@@ -178,14 +180,23 @@ function handleSearch(e){
           <FormField>             
       {errors? <div>{errors}</div>:null}
           </FormField>
+          </FormBox>
         </form>
         : <p></p>
          }
+         
       </WrapperChild>
       
     </Wrapper>
   );
 }
+const FormBox = styled.div`
+  border-radius: 6px;
+  box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
+  0 0 0 1px rgb(10 10 10 / 2%);
+  padding: 16px;
+  justify-self: end;
+`;
 
 const Wrapper = styled.section`
   max-width: 1000px;
@@ -207,6 +218,7 @@ const But = styled.button`
 
 const WrapperChild = styled.div`
   flex: 1;
+  justify-content: space-between;
 `;
 
 export default NewAnime;

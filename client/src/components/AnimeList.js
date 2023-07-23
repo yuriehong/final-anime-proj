@@ -46,6 +46,8 @@ function onRemoveAnime(anime) {
             <option value="Comedy">Comedy</option>
             <option value="Adventure">Adventure</option>
             <option value="Shonen">Shonen</option>
+            <option value="Drama">Shonen</option>
+
 
 
           </select>
